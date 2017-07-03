@@ -1,0 +1,85 @@
+.app-header {
+  position: fixed;
+  top: 0px;
+  z-index: 1000;
+  width: 100%;
+  flex-direction: row;
+  height: 60px;
+  padding: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e6ef;
+}
+
+header.navbar .navbar-brand {
+  display: inline-block;
+  width: 250px;
+  height: 60px;
+  padding: 0.5rem 1rem;
+  margin-right: 0;
+  background-color: #20a8d8;
+  background-image: url(/assets/img/logo.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 90px auto;
+  border-bottom: 1px solid #1985ac;
+}
+
+.navbar-brand {
+  color: #7e92b9;
+}
+
+.search-form {
+  border-right: 1px solid #e1e6ef !important;
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
+}
+.search-form i {
+  color: #c0cadd;
+}
+.search-form input {
+  margin-top: -3px;
+  color: #c0cadd;
+  border: 0;
+}
+.app-body {
+  margin-top: 60px;
+}
+.sidebar {
+  position: fixed;
+  height: 100%;
+  flex: 0 0 250px;
+  order: -1;
+  padding: 0;
+  color: #fff;
+  background: #384042;
+  transition-duration: 0.25s, 0.25s;
+  transition-property: margin-left, margin-right;
+}
+.sidebar .nav {
+  width: 250px;
+  flex-direction: column !important;
+}
+.nav-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: transparent;
+}
+.nav-dropdown.open > ul {
+  max-height: 1000px;
+
+}
+.nav-item ul {
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+  overflow-y: hidden;
+  transition: max-height .3s ease-in-out;
+}
+
+.nav-dropdown-items li {
+  padding-left: 10px;
+  list-style: none;
+  background-color: #2e2e2e;
+}
