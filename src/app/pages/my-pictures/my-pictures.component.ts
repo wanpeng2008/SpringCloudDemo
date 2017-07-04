@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyPicturesComponent implements OnInit {
 
-  private settings;
+  settings;
   constructor() { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class MyPicturesComponent implements OnInit {
           title: 'Email'
         }
       }
-    };
+    }
   }
 
 }

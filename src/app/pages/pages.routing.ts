@@ -13,6 +13,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'myPictures', pathMatch: 'full' },
       { path: 'myPictures', loadChildren: 'app/pages/my-pictures/my-pictures.module#MyPicturesModule' },
+      { path: 'storageServer', loadChildren: 'app/pages/storage-server/storage-server.module#StorageServerModule' },
     ]
   }
 ];

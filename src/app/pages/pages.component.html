@@ -4,9 +4,31 @@
     <i class="fa fa-search"></i>
     <input type="text" class="form-control" placeholder="Search...">
   </form>
-  <ul class="nav navbar-nav">
-    <li class="nav-item dropdown"></li>
-  </ul>
+  <div class="nav header-tool-bar">
+    <div class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item">Action - 1</button>
+            <button class="dropdown-item">Another Action</button>
+            <button class="dropdown-item">Something else is here</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col text-right">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Toggle dropup</button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBasic2">
+            <button class="dropdown-item">Action - 1</button>
+            <button class="dropdown-item">Another Action</button>
+            <button class="dropdown-item">Something else is here</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 <div class="app-body">
   <div class="sidebar">
@@ -16,7 +38,7 @@
           <span>管理员</span>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link">
+          <a class="nav-link" [routerLink]="['/pages/myPictures']">
             <i class="fa fa-picture-o"></i>
             我的图片
           </a>
@@ -27,17 +49,17 @@
           <a class="nav-link nav-dropdown-toggle" href="#">
             <i class="fa fa-server"></i>
             存储服务
-            <b class="fa fa-angle-down pull-right"></b>
+            <b class="fa pull-right" [ngClass]="{'fa-angle-right': isCollapsed,'fa-angle-down': !isCollapsed}" (click)="isCollapsed = !isCollapsed"></b>
           </a>
-          <ul class="nav-dropdown-items">
+          <ul class="nav-dropdown-items" [ngbCollapse]="isCollapsed">
             <li class="nav-item">
-              <a class="nav-link" href="components-buttons.html"><i class="fa fa-folder-open-o"></i> 公共图片</a>
+              <a class="nav-link" [routerLink]="['/pages/storageServer/public']"><i class="fa fa-folder-open-o"></i> 公共图片</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="components-social-buttons.html"><i class="fa fa-lock"></i> 私有图片<span class="badge badge-info">NEW</span></a>
+              <a class="nav-link" [routerLink]="['/pages/storageServer/private']"><i class="fa fa-lock"></i> 私有图片<span class="badge badge-info">NEW</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="components-cards.html"><i class="fa fa-trash-o"></i> 过期图片</a>
+              <a class="nav-link" [routerLink]="['/pages/storageServer/expired']"><i class="fa fa-trash-o"></i> 过期图片</a>
             </li>
           </ul>
         </li>

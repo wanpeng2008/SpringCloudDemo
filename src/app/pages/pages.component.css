@@ -41,6 +41,9 @@ header.navbar .navbar-brand {
   color: #c0cadd;
   border: 0;
 }
+.header-tool-bar {
+  align-items: center;
+}
 .app-body {
   margin-top: 60px;
 }
