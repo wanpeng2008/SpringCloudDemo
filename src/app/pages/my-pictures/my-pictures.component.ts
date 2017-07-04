@@ -7,9 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyPicturesComponent implements OnInit {
 
+  private settings;
   constructor() { }
 
   ngOnInit() {
+    console.debug('MyPicturesComponent init')
+    this.settings = {
+      columns: {
+        id: {
+          title: 'ID'
+        },
+        name: {
+          title: 'Full Name'
+        },
+        username: {
+          title: 'User Name'
+        },
+        email: {
+          title: 'Email'
+        }
+      }
+    };
   }
 
 }

@@ -83,3 +83,12 @@ header.navbar .navbar-brand {
   list-style: none;
   background-color: #2e2e2e;
 }
+
+li.nav-item:hover {
+  background-color: darkblue;
+}
+
+.main {
+  margin: 0 0 0 250px;
+  flex: 1;
+}
