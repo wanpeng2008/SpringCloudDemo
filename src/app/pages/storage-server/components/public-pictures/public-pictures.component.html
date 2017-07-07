@@ -4,4 +4,6 @@
   <a class="breadcrumb-item" href="#">Data</a>
   <span class="breadcrumb-item active">Bootstrap</span>
 </nav>
-<ng2-smart-table [settings]="settings"></ng2-smart-table>
+<ng2-smart-table [settings]="settings" [source]="source"
+                 (userRowSelect)="userRowSelect($event)"
+></ng2-smart-table>
