@@ -7,15 +7,16 @@ import {PictureService} from "./service/picture.service";
 import { DatetimeRenderComponent } from './component/cell-data/datetime-render/datetime-render.component';
 import { PicDetailRenderComponent } from './component/cell-data/pic-detail-render/pic-detail-render.component';
 import { PicDetailComponent } from './component/pic-detail/pic-detail.component';
+import { FileNameCellComponent } from './component/file-name-cell/file-name-cell.component';
 
 const COMPONENTS = [
-  TopNavComponent, SideMenuComponent, DatetimeRenderComponent, PicDetailRenderComponent, PicDetailComponent
+  TopNavComponent, SideMenuComponent, DatetimeRenderComponent, PicDetailRenderComponent, PicDetailComponent, FileNameCellComponent
 ]
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ],
   entryComponents: [
     DatetimeRenderComponent,
     PicDetailRenderComponent,
@@ -26,7 +27,8 @@ const COMPONENTS = [
     PictureService,
   ],
   exports: [
-    PicDetailComponent
+    PicDetailComponent,
+    FileNameCellComponent
   ]
 })
 export class ShareModule { }

@@ -9,6 +9,7 @@ import {storageServerRuting} from "./storage-server.routing";
 import {ShareModule} from "../../share/share.module";
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     storageServerRuting,
     NgbModule,
     Ng2SmartTableModule,
+    FormsModule,
     ShareModule,
   ],
   declarations: [StorageServerComponent, PublicPicturesComponent, PrivatePicturesComponent, ExpiredPicturesComponent]

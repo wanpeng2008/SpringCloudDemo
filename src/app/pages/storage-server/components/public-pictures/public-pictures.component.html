@@ -4,6 +4,56 @@
   <a class="breadcrumb-item" href="#">Data</a>
   <span class="breadcrumb-item active">Bootstrap</span>
 </nav>
-<ng2-smart-table [settings]="settings" [source]="source"
-                 (userRowSelect)="userRowSelect($event)"
-></ng2-smart-table>
+<table class="table table-hover table-striped">
+  <caption class="table-title">上下文表格布局</caption>
+  <thead>
+  <tr class="table-inverse">
+    <th style="width: 1em"><input type="checkbox" ></th>
+    <th class="text-center">文件名</th>
+    <th class="text-center">上传人</th>
+    <th class="text-center">上传时间</th>
+    <th class="text-center">图片类型</th>
+    <th class="text-center">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of picDetailList">
+    <td rowspan="1"><input type="checkbox"></td>
+    <td rowspan="1" class="text-center">{{item.fileName}}</td>
+    <td rowspan="1" class="text-center">{{item.owner}}</td>
+    <td rowspan="1" class="text-center">{{item.createDate | date:'yyyy-MM-dd HH:mm'}}</td>
+    <td rowspan="1" class="text-center">{{item.contentType}}</td>
+    <td rowspan="1" class="text-center"><button class="btn btn-sm btn-danger">删除</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="container-fluid">
+  <div class="row">
+    <caption class="table-title">上下文表格布局</caption>
+  </div>
+  <div class="row table-inverse table-header">
+    <div style="width: 1em"><input type="checkbox" [(ngModel)]="allChecked" (ngModelChange)="allCheckedChange($event)"></div>
+    <div class="col-sm-3 text-center">文件名</div>
+    <div class="col-sm-2 text-center">上传人</div>
+    <div class="col-sm-2 text-center">上传时间</div>
+    <div class="col-sm-2 text-center">图片类型</div>
+    <div class="col-sm-2 text-center">操作</div>
+  </div>
+  <div class="row table-row" *ngFor="let item of picDetailList">
+    <div style="width: 1em"><input type="checkbox" [(ngModel)]="item.checked"></div>
+    <div class="col-sm-3 text-center">
+      <app-file-name-cell [fileName]="item.fileName" (fileNameClicked)="fileNameClicked($event,item)"></app-file-name-cell>
+    </div>
+    <div class="col-sm-2 text-center"> {{item.owner}}</div>
+    <div class="col-sm-2 text-center">{{item.createDate | date:'yyyy-MM-dd HH:mm'}}</div>
+    <div class="col-sm-2 text-center">{{item.contentType}}</div>
+    <div class="col-sm-2 text-center"><button class="btn btn-sm btn-danger">删除</button></div>
+    <div class="col-sm-1"></div>
+    <div *ngIf="item.showDetail" class="col-sm-11" >
+      <app-pic-detail [fileId]="item.fileId"></app-pic-detail>
+    </div>
+  </div>
+</div>
+
+<p>{{allChecked}}</p>

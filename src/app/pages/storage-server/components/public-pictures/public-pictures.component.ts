@@ -10,75 +10,31 @@ import {PicDetailRenderComponent} from "../../../../share/component/cell-data/pi
   styleUrls: ['./public-pictures.component.css']
 })
 export class PublicPicturesComponent implements OnInit {
-  settings
-  source: LocalDataSource;
+  picDetailList
+  allChecked: boolean = false
   constructor(private pictureService: PictureService) {
-    this.source = new LocalDataSource();
+    this.picDetailList = [];
   }
 
   ngOnInit() {
     console.debug('PublicPicturesComponent init')
-    this.settings = {
-      selectMode: 'multi',
-      hideSubHeader: true,
-      noDataMessage: '没有shuj',
-      editable: false,
-      attr: {
-        id: 'public_pic',
-        class: 'list-table'
-      },
-      rowClassFunction: this.rowClassFunction,
-      actions: {
-        columnTitle: '操作',
-        add: false,
-        edit: false,
-        delete: true,
-        position: 'right',
-      },
-      delete: {
-        deleteButtonContent: '删除',
-        confirmDelete: true,
-      },
-      page: {
-        display: true,
-        perPage: 10,
-      },
-      columns: {
-        fileName: {
-          title: '文件名',
-          type: 'custom',
-          renderComponent: PicDetailRenderComponent,
-        },
-        owner: {
-          title: '上传人'
-        },
-        createDate: {
-          title: '上传时间',
-          type: 'custom',
-          renderComponent: DatetimeRenderComponent,
-        },
-        contentType: {
-          title: '图片类型'
-        },
-      }
-    }
     this.loadData()
   }
   loadData(){
     this.pictureService.list().subscribe(
       data => {
-        this.source.load(data)
+        this.picDetailList = data
       }
     )
   }
-  rowClassFunction(){
-    return "list-table-row"
+
+  allCheckedChange($event){
+    this.picDetailList.map(item =>{
+      item.checked = $event
+    })
   }
-  userRowSelect($event){
-    console.debug($event)
-  }
-  mouseover($event){
-    console.debug($event)
+  fileNameClicked($event,item){
+    item.showDetail=!item.showDetail
   }
 
 }

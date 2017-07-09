@@ -1,3 +1,12 @@
-.picListTable {
-  background-color: rebeccapurple;
+.table-title {
+  caption-side: top;
+  text-align: center;
+}
+.table-header {
+  vertical-align: bottom;
+  padding: 0.75rem;
+}
+.table-row {
+  vertical-align: top;
+  padding: 0.75rem;
 }

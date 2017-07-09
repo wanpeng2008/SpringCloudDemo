@@ -1,17 +1,27 @@
-import {Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {
+  Compiler, Component, ComponentFactory, ComponentRef, ElementRef, Input, NgModule, NgZone, OnInit, Renderer2,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {ViewCell} from "ng2-smart-table";
+import {RouterModule} from "@angular/router";
+import {BrowserModule} from "@angular/platform-browser";
+import {ShareModule} from "../../../share.module";
 
 @Component({
   selector: 'app-pic-detail-render',
   templateUrl: './pic-detail-render.component.html',
-  styleUrls: ['./pic-detail-render.component.css']
+  styleUrls: ['./pic-detail-render.component.css'],
 })
+
 export class PicDetailRenderComponent implements OnInit, ViewCell {
   renderValue: string;
   @Input() value: string | number;
   @Input() rowData: any;
-
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  @ViewChild('dynamiccompile',{read : ViewContainerRef})
+  target: ViewContainerRef;
+  private cmpRef :  ComponentRef<any>;
+  constructor(private el: ElementRef, private renderer: Renderer2, private compiler: Compiler, private viewContainer: ViewContainerRef, private zone:NgZone) {
   }
 
   ngOnInit() {
@@ -50,7 +60,16 @@ export class PicDetailRenderComponent implements OnInit, ViewCell {
       this.renderer.appendChild(newTr, this.renderer.createElement('td'))
       let newTd = this.renderer.createElement('td')
       this.renderer.setAttribute(newTd, 'colSpan', (tr.childElementCount-1).toString())
-      let contentDiv = this.renderer.createElement('app-pic-detail')
+      let contentDiv = this.renderer.createElement('div')
+      let appPicDetail = this.renderer.createElement('app-pic-detail')
+
+      //this.viewContainer.element = new ElementRef(contentDiv)
+      this.compileToComponent("<app-pic-detail></app-pic-detail>").then((factory: ComponentFactory<any>) => {
+        //this.cmpRef =
+          this.viewContainer.createComponent(factory)
+      })
+
+      this.renderer.appendChild(contentDiv, appPicDetail)
       this.renderer.appendChild(newTd, contentDiv)
       this.renderer.appendChild(newTr, newTd)
       let nextSibling = this.renderer.nextSibling(tr)
@@ -61,6 +80,7 @@ export class PicDetailRenderComponent implements OnInit, ViewCell {
       }
       //tr.className += ' list-table-row-detail'
       this.renderer.addClass(tr, 'list-table-row-detail');
+      this.zone.run(()=>{})
     }
   }
 
@@ -72,6 +92,26 @@ export class PicDetailRenderComponent implements OnInit, ViewCell {
     let td = ng2SmartTableCell.parentNode
     let tr = td.parentNode
     return tr;
+  }
+  private compileToComponent(template1: string): Promise<ComponentFactory<any>> {
+
+    @Component({
+      template: template1,
+    })
+    class DynamicComponent {
+      test () : void {
+        console.log('111');
+      }
+    }
+    @NgModule({
+      imports: [BrowserModule,RouterModule,ShareModule],
+      declarations: [DynamicComponent]
+    })
+    class DynamicModule { }
+
+    return this.compiler.compileModuleAndAllComponentsAsync(DynamicModule).then(
+      factory => factory.componentFactories.find(x => x.componentType === DynamicComponent)
+    )
   }
 
 }
