@@ -8,15 +8,16 @@ import { DatetimeRenderComponent } from './component/cell-data/datetime-render/d
 import { PicDetailRenderComponent } from './component/cell-data/pic-detail-render/pic-detail-render.component';
 import { PicDetailComponent } from './component/pic-detail/pic-detail.component';
 import { FileNameCellComponent } from './component/file-name-cell/file-name-cell.component';
+import { OrderByPipe } from './pipe/order-by.pipe';
 
 const COMPONENTS = [
-  TopNavComponent, SideMenuComponent, DatetimeRenderComponent, PicDetailRenderComponent, PicDetailComponent, FileNameCellComponent
+  TopNavComponent, SideMenuComponent, DatetimeRenderComponent, PicDetailRenderComponent, PicDetailComponent, FileNameCellComponent, FileNameCellComponent,OrderByPipe
 ]
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [...COMPONENTS, ],
+  declarations: [...COMPONENTS],
   entryComponents: [
     DatetimeRenderComponent,
     PicDetailRenderComponent,
@@ -28,7 +29,8 @@ const COMPONENTS = [
   ],
   exports: [
     PicDetailComponent,
-    FileNameCellComponent
+    FileNameCellComponent,
+    OrderByPipe
   ]
 })
 export class ShareModule { }

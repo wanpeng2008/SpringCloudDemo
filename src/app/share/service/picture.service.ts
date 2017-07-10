@@ -6,14 +6,24 @@ import {Http} from "@angular/http";
 @Injectable()
 export class PictureService {
 
-  private api: Observable<any>
+  private listApi(): Observable<any> { return this.http.get('api/list') }
+  private detailApi(id): Observable<any> {return this.http.get('api/picInfo/'+id) }
   constructor(private http: Http) {
-    //this.api = this.http.get('api/list')
-    this.api = this.http.get('assets/data/picture.json')
+    //this.api = this.http.get('assets/data/picture.json')
   }
   list(){
     return new Observable((observer: Observer<any>) => {
-      this.api.map(res=>res.json()).subscribe(res =>{
+      this.listApi().map(res=>res.json()).subscribe(res =>{
+        observer.next(res)
+        observer.complete()
+      }, error => {
+        observer.error(error)
+      })
+    })
+  }
+  detail(id){
+    return new Observable((observer: Observer<any>) => {
+      this.detailApi(id).map(res=>res.json()).subscribe(res =>{
         observer.next(res)
         observer.complete()
       }, error => {

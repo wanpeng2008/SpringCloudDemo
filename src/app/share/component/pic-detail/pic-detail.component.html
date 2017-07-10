@@ -1,11 +1,11 @@
-<p>
-  pic-detail works!
-  {{fileId}}
-</p>
-<ul>
-  <li>a</li>
-  <li>b</li>
-  <li>c</li>
-  <li>d</li>
-  <li>e</li>
-</ul>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row" *ngFor="let item of picDetail?.filePaths | orderBy: ['displayOrder']">
+      <div class="col-sm-3"><span>{{item.resolutionName}}</span></div>
+      <div class="col-sm-7"><input class="img-url" type="text" [value]="item.filePath"></div>
+      <div class="col-sm-2"><button class="btn btn-sm btn-outline-primary">复制</button></div>
+    </div>
+  </div>
+  <div class="col-sm-6"></div>
+</div>
+
